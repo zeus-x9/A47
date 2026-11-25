@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Notes Storage</h1>
+    <form action="">
+        <input type="text">
+        <button type="submit">Save Note</button>
+    </form>
+    <button id="clear" onclick="clearr()">CLEAR</button>
+    <ul>
+
+    </ul>
+</body>
+
+<script>
+
+const form = document.querySelector("form");
+const input = document.querySelector("input");
+const list = document.querySelector("ul");
+
+const clear = document.getElementById("clear");
+
+function clearr(){
+    localStorage.clear();
+    window.location.reload()
+}
+
+function display(){
+globalThis.notes = JSON.parse(localStorage.getItem("notes")) || [];
+notes.forEach((note) =>{
+const outnote = document.createElement("li");
+list.appendChild(outnote);
+outnote.innerText = note;
+});
+};
+
+display()
+
+form.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    if(!input.value){
+        alert("Please enter a valid note!")
+    }else{
+        notes.push(input.value)
+        localStorage.setItem("notes",JSON.stringify(notes))
+        const outnote = document.createElement("li");
+        list.appendChild(outnote);
+        outnote.innerText = input.value;
+    }
+})
+
+
+</script>
+
+</html>
